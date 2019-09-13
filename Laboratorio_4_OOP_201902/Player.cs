@@ -23,6 +23,7 @@ namespace Laboratorio_4_OOP_201902
         private Hand hand;
         private Board board;
         private SpecialCard captain;
+        Random rnd;
 
         //Constructor
         public Player()
@@ -117,15 +118,15 @@ namespace Laboratorio_4_OOP_201902
 
             if (deck.Cards[cardId] is CombatCard)
             {
-                CombatCard choosencard = deck.Cards[cardId];
-                CombatCard auxCombatCard = new CombatCard(choosencard.Name, choosencard.Type, choosencard.Effect, choosencard.AttackPoints, choosencard.Hero);
+                CombatCard choosenCard = deck.Cards[cardId];
+                CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
                 deck.DestroyCard(cardId);
                 Hand.AddCard(auxCombatCard);
             }
             else
             {
-                SpecialCard choosencard = deck.Cards[cardId];
-                SpecialCard auxSpecialCard = new SpecialCard(choosencard.Name, choosencard.Type, choosencard.Effect);
+                SpecialCard choosenCard = deck.Cards[cardId];
+                SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
                 deck.DestroyCard(cardId);
                 Hand.AddCard(auxSpecialCard);
             }
@@ -146,15 +147,15 @@ namespace Laboratorio_4_OOP_201902
              */
             if (Hand.Cards[cardId] is CombatCard)
             {
-                CombatCard choosencard = Hand.Cards[cardId];
-                CombatCard auxCombatCard = new CombatCard(choosencard.Name, choosencard.Type, choosencard.Effect, choosencard.AttackPoints, choosencard.Hero);
+                CombatCard choosenCard = Hand.Cards[cardId];
+                CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
                 Hand.DestroyCard(cardId);
                 Board.AddCard(auxCombatCard,Id,buffRow);
             }
             else
             {
-                SpecialCard choosencard = Hand.Cards[cardId];
-                SpecialCard auxSpecialCard = new SpecialCard(choosencard.Name, choosencard.Type, choosencard.Effect);
+                SpecialCard choosenCard = Hand.Cards[cardId];
+                SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
                 if (auxSpecialCard.BuffType != null)
                 {
                     Board.AddCard(auxSpecialCard, Id, buffRow);
@@ -179,7 +180,29 @@ namespace Laboratorio_4_OOP_201902
                 6- Elimine la carta aleatoria escogida del mazo.
                 7- Agregue la carta original de la mano al mazo.
             */
-            throw new NotImplementedException();
+            if (hand.Cards[cardId] is CombatCard)
+            {
+                CombatCard choosenCard = Hand.Cards[cardId];
+                CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
+                Hand.DestroyCard(cardId);
+                rnd = new Random();
+                int auxCardId = rnd.Next(1, Deck.Cards.Count+1);
+                DrawCard(auxCardId);
+                Deck.DestroyCard(auxCardId);
+                Deck.AddCard(choosenCard);
+
+            }
+            else
+            {
+                SpecialCard choosenCard = Hand.Cards[cardId];
+                SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
+                Hand.DestroyCard(cardId);
+                rnd = new Random();
+                int auxCardId = rnd.Next(1, Deck.Cards.Count + 1);
+                DrawCard(auxCardId);
+                Deck.DestroyCard(auxCardId);
+                Deck.AddCard(choosenCard);
+            }
         }
 
         public void FirstHand()
@@ -187,10 +210,10 @@ namespace Laboratorio_4_OOP_201902
             /*Debe obtener 10 cartas aleatorias del mazo y asignarlas a la mano.
             Utilice el metodo DrawCard con 10 numeros de id aleatorios.
             */
-            Random rnd = new Random();
+            rnd = new Random();
             for (int i = 0; i < 11; i++)
             {
-                int cardId = rnd.Next(1, 50);
+                int cardId = rnd.Next(1, Deck.Cards.Count+1);
                 DrawCard(cardId);
             }
             
