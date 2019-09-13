@@ -1,6 +1,7 @@
 ﻿using Laboratorio_4_OOP_201902.Cards;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Laboratorio_4_OOP_201902
@@ -20,19 +21,20 @@ namespace Laboratorio_4_OOP_201902
         public void AddCard(Card card)
         {
             //Agregue la carta card a la lista cards
-            throw new NotImplementedException();
+            Cards.Add(card);
         }
         public void DestroyCard(int cardId)
         {
             /* Debe eliminar la carta segun el parametro cardId. Para esto
                 1- Utilice el metodo RemoveAt de las listas para eliminar la carta en cards
             */
-            throw new NotImplementedException();
+            cards.RemoveAt(cardId);
         }
         public void Shuffle()
         {
             //Reordenar el mazo de manera aleatoria (barajar).
-            throw new NotImplementedException();
+            var rnd = new Random();
+            var result = cards.OrderBy(x => rnd.Next()).ToList();
         }
     }
 }

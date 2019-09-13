@@ -114,7 +114,21 @@ namespace Laboratorio_4_OOP_201902
                 2.3- Agregue la nueva carta a la mano
             Elimine la carta del mazo.
             Hint: Utilice los métodos ya creados en Hand y Deck (AddCard y DestroyCard), no se preocupe de la implementacion de estos aun.*/
-            throw new NotImplementedException();
+
+            if (deck.Cards[cardId] is CombatCard)
+            {
+                CombatCard choosencard = deck.Cards[cardId];
+                CombatCard auxCombatCard = new CombatCard(choosencard.Name, choosencard.Type, choosencard.Effect, choosencard.AttackPoints, choosencard.Hero);
+                deck.DestroyCard(cardId);
+                Hand.AddCard(auxCombatCard);
+            }
+            else
+            {
+                SpecialCard choosencard = deck.Cards[cardId];
+                SpecialCard auxSpecialCard = new SpecialCard(choosencard.Name, choosencard.Type, choosencard.Effect);
+                deck.DestroyCard(cardId);
+                Hand.AddCard(auxSpecialCard);
+            }
         }
         public void PlayCard(int cardId, EnumType buffRow = EnumType.None)
         {
@@ -130,7 +144,27 @@ namespace Laboratorio_4_OOP_201902
                         -El metodo AddCard solo requiere la carta.
                 3- Elimine la carta de la mano. 
              */
-            throw new NotImplementedException();
+            if (Hand.Cards[cardId] is CombatCard)
+            {
+                CombatCard choosencard = Hand.Cards[cardId];
+                CombatCard auxCombatCard = new CombatCard(choosencard.Name, choosencard.Type, choosencard.Effect, choosencard.AttackPoints, choosencard.Hero);
+                Hand.DestroyCard(cardId);
+                Board.AddCard(auxCombatCard,Id,buffRow);
+            }
+            else
+            {
+                SpecialCard choosencard = Hand.Cards[cardId];
+                SpecialCard auxSpecialCard = new SpecialCard(choosencard.Name, choosencard.Type, choosencard.Effect);
+                if (auxSpecialCard.BuffType != null)
+                {
+                    Board.AddCard(auxSpecialCard, Id, buffRow);
+                }
+                else
+                {
+                    board.AddCard(auxSpecialCard);
+                }
+                Hand.DestroyCard(cardId);
+            }
         }
         public void ChangeCard(int cardId)
         {
@@ -153,7 +187,14 @@ namespace Laboratorio_4_OOP_201902
             /*Debe obtener 10 cartas aleatorias del mazo y asignarlas a la mano.
             Utilice el metodo DrawCard con 10 numeros de id aleatorios.
             */
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            for (int i = 0; i < 11; i++)
+            {
+                int cardId = rnd.Next(1, 50);
+                DrawCard(cardId);
+            }
+            
+
         }
 
         public void ChooseCaptainCard(SpecialCard captainCard)
