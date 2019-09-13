@@ -118,14 +118,14 @@ namespace Laboratorio_4_OOP_201902
 
             if (deck.Cards[cardId] is CombatCard)
             {
-                CombatCard choosenCard = deck.Cards[cardId];
+                CombatCard choosenCard =(CombatCard) deck.Cards[cardId];
                 CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
                 deck.DestroyCard(cardId);
                 Hand.AddCard(auxCombatCard);
             }
             else
             {
-                SpecialCard choosenCard = deck.Cards[cardId];
+                SpecialCard choosenCard =(SpecialCard) deck.Cards[cardId];
                 SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
                 deck.DestroyCard(cardId);
                 Hand.AddCard(auxSpecialCard);
@@ -147,14 +147,14 @@ namespace Laboratorio_4_OOP_201902
              */
             if (Hand.Cards[cardId] is CombatCard)
             {
-                CombatCard choosenCard = Hand.Cards[cardId];
+                CombatCard choosenCard =(CombatCard) Hand.Cards[cardId];
                 CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
                 Hand.DestroyCard(cardId);
                 Board.AddCard(auxCombatCard,Id,buffRow);
             }
             else
             {
-                SpecialCard choosenCard = Hand.Cards[cardId];
+                SpecialCard choosenCard =(SpecialCard) Hand.Cards[cardId];
                 SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
                 if (auxSpecialCard.BuffType != null)
                 {
@@ -182,7 +182,7 @@ namespace Laboratorio_4_OOP_201902
             */
             if (hand.Cards[cardId] is CombatCard)
             {
-                CombatCard choosenCard = Hand.Cards[cardId];
+                CombatCard choosenCard = (CombatCard) Hand.Cards[cardId];
                 CombatCard auxCombatCard = new CombatCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect, choosenCard.AttackPoints, choosenCard.Hero);
                 Hand.DestroyCard(cardId);
                 rnd = new Random();
@@ -190,11 +190,10 @@ namespace Laboratorio_4_OOP_201902
                 DrawCard(auxCardId);
                 Deck.DestroyCard(auxCardId);
                 Deck.AddCard(choosenCard);
-
             }
             else
             {
-                SpecialCard choosenCard = Hand.Cards[cardId];
+                SpecialCard choosenCard =(SpecialCard) Hand.Cards[cardId];
                 SpecialCard auxSpecialCard = new SpecialCard(choosenCard.Name, choosenCard.Type, choosenCard.Effect);
                 Hand.DestroyCard(cardId);
                 rnd = new Random();
